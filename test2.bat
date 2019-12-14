@@ -97,8 +97,5 @@ if %option% ==0 goto main
 goto submenu_4
 
 
-echo this is File management System.
-echo another line 
-
 
 
