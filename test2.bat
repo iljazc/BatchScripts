@@ -51,7 +51,9 @@ set /p name=Enter the name of your file:
 set /p extention=Enter the extension of your file:
 
 :readFile
-start jjz.txt
+dir
+set /p rfile =Enter the name of the file: 
+start %rfile%
 
 goto submenu_1
 :submenu_2
