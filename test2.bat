@@ -8,7 +8,7 @@ ECHO Welcome, %USERNAME%!
 echo. 
 echo Main Menu
 echo. 
-:main
+:main c 
 echo 1. File Management
 echo 2. Applications 
 echo 3. System
@@ -97,7 +97,7 @@ if %option% ==0 goto main
 goto submenu_4
 
 
-
+echo this is File management System.
 
 
 
