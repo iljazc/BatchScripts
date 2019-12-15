@@ -127,11 +127,20 @@ echo.
 
 ::copying file
 :copyFile
+    cls
+    echo.
     echo Copying 
-    echo /p %srcLoc%=Enter your source location: 
-    echo /p %trgLoc%=Enter your target location: 
-    copy /s C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\TestSubmenu.bat C:\Users\iljaz\OneDrive\Desktop\
-
+    echo.
+    dir
+    echo.
+    echo Enter the name of the file that you want to copy: 
+    set /p source=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
+    echo.
+    echo Enter the name of new file:
+    ::set /p destination=z:\Documents\Scripts\BatchScripts 
+    set /p destination=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
+    xcopy %source% %destination%* 
+    
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
     if "%menu_choice%"=="y" goto copyFile
     if "%menu_choice%"=="n" goto submenu_1
@@ -139,11 +148,41 @@ echo.
 
 ::Moving File
 :moveFile
-    echo Moving
+    cls
+    echo Move file
+    echo.
+    dir
+    echo.
+    echo Press 1 in case you want to enter the full source path_address.
+    echo Press 2 in case you want to enter only the destination's path_address
+    echo.
+    set /p choice= Please select one of the options: 
+    if %choice%==1 goto specifingSourceAndDestination 
+    if %choice%==2 goto specifingDestination
     
-    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto moveFile
-    if "%menu_choice%"=="n" goto submenu_1
+    :specifingSourceAndDestination
+        set /p source= Enter the name of the file that you want to move:
+        echo.
+        set /p destination= Enter the destination path:
+        move %source% %destination%
+
+        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+        if "%menu_choice%"=="y" goto moveFile
+        if "%menu_choice%"=="n" goto submenu_1
+    ::end of block
+
+    :specifingDestination
+        echo Please enter the full path of the file that you want to move: 
+        set /p source=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
+        echo.
+        set /p destination= Enter the destination path: 
+        move %source% %destination%
+
+        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+        if "%menu_choice%"=="y" goto moveFile
+        if "%menu_choice%"=="n" goto submenu_1
+    ::end of block
+
 ::end of block
 
 ::Deleting File
@@ -169,7 +208,6 @@ echo.
     start C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts
     goto submenu_1
 ::end of block
-
 
 ::this is submenu 2 (Applications)
 :submenu_2
