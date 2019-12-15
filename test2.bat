@@ -38,12 +38,13 @@ echo.
     ECHO.    
     echo 1. New File
     echo 2. Read File
-    echo 3. Write into File
-    echo 4. Copy File
-    echo 5. Move File
-    echo 6. Delete File
-    echo 7. Rename File
-    echo 8. Open File Location
+    echo 3. Add into File
+    echo 4. Override
+    echo 5. Copy File
+    echo 6. Move File
+    echo 7. Delete File
+    echo 8. Rename File
+    echo 9. Open File Location
     echo 0. Go Back
     ECHO.
 
@@ -51,16 +52,16 @@ echo.
     if %M%==1 goto newFile
     if %M%==2 goto openFile 
     if %M%==3 goto writeFile
-    if %M%==4 start 
-    if %M%==5 start
-    if %M%==6 start 
-    if %M%==7 start
-    if %M%==8 goto fileExplorer
+    if %M%==4 goto overwriteFile 
+    if %M%==5 goto copyFile
+    if %M%==6 goto moveFile 
+    if %M%==7 goto deleteFile
+    if %M%==8 goto renameFile
+    if %M%==9 goto fileExplorer
     if %M%==0 goto main
     
     
 ::end of submenu 1 
-
 
 
 ::Creating new file and specifing extension 
@@ -78,36 +79,50 @@ echo.
     echo %txt% >> %name%.%extension%
     echo.
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto submenu_1
-    if "%menu_choice%"=="n" goto main
+    if "%menu_choice%"=="y" goto newFile
+    if "%menu_choice%"=="n" goto submenu_1
 ::end of block
 
 ::Reading/Opening file
 :openFile
     dir
     echo.
-    set /p rfile =Enter the name of the file: 
-    
-    
-    %SystemRoot%\system32\cmd.exe "rfile"
-    
-    
+    set /p fileName=Enter the name of the file: 
+    start C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\%fileName%\
     echo.
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto submenu_1
-    if "%menu_choice%"=="n" goto main
+    if "%menu_choice%"=="y" goto openFile
+    if "%menu_choice%"=="n" goto submenu_1
 
 ::end of block
 
-::Overwriting files
+::Adding into file
 :writeFile
     cls
     echo.
     echo Adding text into the file.
-    
+    set /p txtFile= Enter the name of the file that you want to add text: 
+    set /p txtToBeAdded= Type here your text: 
+    echo %txtToBeAdded% >> C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\%txtFile%
+    echo.
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto submenu_1
-    if "%menu_choice%"=="n" goto main
+    if "%menu_choice%"=="y" goto writeFile
+    if "%menu_choice%"=="n" goto submenu_1
+::end of block
+
+::Overwriting file
+:overwriteFile
+    cls
+    echo.
+    echo Replacing the content of the excisting file
+    echo.
+    set /p txtFile= Enter the name of the file that you want to overwrite: 
+    set /p txtToBeAdded= Type here your text: 
+    echo %txtToBeAdded% > C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\%txtFile%
+    echo.
+    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+    if "%menu_choice%"=="y" goto overwriteFile
+    if "%menu_choice%"=="n" goto submenu_1
 ::end of block
 
 ::copying file
@@ -115,8 +130,8 @@ echo.
     echo Copying 
     
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto submenu_1
-    if "%menu_choice%"=="n" goto main
+    if "%menu_choice%"=="y" goto copyFile
+    if "%menu_choice%"=="n" goto submenu_1
 ::end of block
 
 ::Moving File
@@ -124,8 +139,8 @@ echo.
     echo Moving
     
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto submenu_1
-    if "%menu_choice%"=="n" goto main
+    if "%menu_choice%"=="y" goto moveFile
+    if "%menu_choice%"=="n" goto submenu_1
 ::end of block
 
 ::Deleting File
@@ -133,8 +148,8 @@ echo.
     echo Deleting 
     
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto submenu_1
-    if "%menu_choice%"=="n" goto main
+    if "%menu_choice%"=="y" goto deleteFile
+    if "%menu_choice%"=="n" goto submenu_1
 ::end of block
 
 ::Renaming Fie 
@@ -142,13 +157,14 @@ echo.
     echo Renaming
     
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto submenu_1
-    if "%menu_choice%"=="n" goto main
+    if "%menu_choice%"=="y" goto renameFile
+    if "%menu_choice%"=="n" goto submenu_1
 ::end of block
 
 ::File Location
 :fileExplorer
     start C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts
+    goto submenu_1
 ::end of block
 
 
@@ -170,7 +186,7 @@ echo.
     if %M%==1 start cmd
     if %M%==2 start powershell
     if %M%==3 start explorer
-    if %M%==4 open Settings
+    if %M%==4 start Settings
     if %M%==0 goto main
     
     echo.
@@ -266,8 +282,6 @@ echo.
     if "%menu_choice%"=="y" goto submenu_4
     if "%menu_choice%"=="n" goto main
 ::end of submenu 4
-
-
 
 
 ::exit
