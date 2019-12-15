@@ -5,7 +5,8 @@ title File Management System                           %Date%             %Time%
 
 :start 
 CLS 
-ECHO Welcome, %USERNAME%! 
+echo.
+ECHO Welcome back, %USERNAME%! 
 echo. 
 echo Main Menu
 echo.
@@ -151,8 +152,6 @@ echo.
     cls
     echo Move file
     echo.
-    dir
-    echo.
     echo Press 1 in case you want to enter the full source path_address.
     echo Press 2 in case you want to enter only the destination's path_address
     echo.
@@ -161,7 +160,7 @@ echo.
     if %choice%==2 goto specifingDestination
     
     :specifingSourceAndDestination
-        set /p source= Enter the name of the file that you want to move:
+        set /p source= Enter the full path of the file that you want to move:
         echo.
         set /p destination= Enter the destination path:
         move %source% %destination%
@@ -172,7 +171,10 @@ echo.
     ::end of block
 
     :specifingDestination
-        echo Please enter the full path of the file that you want to move: 
+        echo.
+        dir
+        echo.
+        echo Please enter name path of the file that you want to move: 
         set /p source=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
         echo.
         set /p destination= Enter the destination path: 
@@ -187,20 +189,85 @@ echo.
 
 ::Deleting File
 :deleteFile
+    cls
     echo Deleting 
+    echo.
+    echo Press 1 in case you want to enter the full source path_address.
+    echo Press 2 in case you want to delete a file from the current working directory.
+    echo.
+    set /p choice= Please select one of the options: 
+    if %choice%==1 goto specifingSource
+    if %choice%==2 goto delByFileName
     
-    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto deleteFile
-    if "%menu_choice%"=="n" goto submenu_1
+    :specifingSource
+        set /p filePath= Enter the full path of the file that you want to delete:
+        echo.
+        del %filePath%
+        echo The file at this specific path has been deleted!
+        echo.
+
+        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+        if "%menu_choice%"=="y" goto deleteFile
+        if "%menu_choice%"=="n" goto submenu_1
+    ::end of block
+
+    :delByFileName
+        echo.
+        dir
+        echo.
+        echo Please enter the name of the file that you want to delete: 
+        set /p fileName=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
+        echo.
+        del %fileName%
+        echo %fileName% has been deleted!
+        echo.
+
+        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+        if "%menu_choice%"=="y" goto deleteFile
+        if "%menu_choice%"=="n" goto submenu_1
+    ::end of block
+
 ::end of block
 
 ::Renaming Fie 
 :renameFile
+    cls
     echo Renaming
+    echo.
+    echo Press 1 in case you want to enter the full source path_address.
+    echo Press 2 in case you want to rename a file from the current working directory.
+    echo.
+    set /p choice= Please select one of the options: 
+    if %choice%==1 goto specifingSource
+    if %choice%==2 goto renByFileName
     
-    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto renameFile
-    if "%menu_choice%"=="n" goto submenu_1
+    :specifingSource
+        set /p filePath= Enter the full path of the file that you want to rename:
+        echo.
+        ren %filePath%
+        echo The file at this specific path has been renamed!
+        echo.
+
+        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+        if "%menu_choice%"=="y" goto renameFile
+        if "%menu_choice%"=="n" goto submenu_1
+    ::end of block
+
+    :renByFileName
+        echo.
+        dir
+        echo.
+        echo Please enter the name of the file that you want to rename: 
+        set /p fileName=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
+        echo.
+        ren %fileName%
+        echo %fileName% has been renamed!
+        echo.
+
+        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+        if "%menu_choice%"=="y" goto renameFile
+        if "%menu_choice%"=="n" goto submenu_1
+    ::end of block
 ::end of block
 
 ::File Location
