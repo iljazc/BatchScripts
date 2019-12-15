@@ -1,19 +1,14 @@
 @ECHO off
 echo. 
 title File Management System                           %Date%             %Time%
-
-
-:start 
-CLS 
+cls
 echo.
 ECHO Welcome back, %USERNAME%! 
-echo. 
-echo Main Menu
-echo.
 
 ::This is Main menu 
 :main 
-    cls
+    echo. 
+    echo Main Menu
     echo.
     echo 1. File Management
     echo 2. Applications 
@@ -62,219 +57,221 @@ echo.
     if %M%==0 goto main
     
     
-::end of submenu 1 
+::submenu 1 options 
 
 
-::Creating new file and specifing extension 
-:newFile
-    cls
-    set /p name=Enter the name of your file:
-    set /p extension=Enter the extension of your file:
-    echo.
-    set /p menu_choice="Would you like to add text to your file (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto enterText
-    if "%menu_choice%"=="n" goto submenu_1
-    echo.
-    :enterText
-    set /p txt=Enter some text into your file: 
-    echo %txt% >> %name%.%extension%
-    echo.
-    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto newFile
-    if "%menu_choice%"=="n" goto submenu_1
-::end of block
-
-::Reading/Opening file
-:openFile
-    dir
-    echo.
-    set /p fileName=Enter the name of the file: 
-    start C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\%fileName%\
-    echo.
-    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto openFile
-    if "%menu_choice%"=="n" goto submenu_1
-
-::end of block
-
-::Adding into file
-:writeFile
-    cls
-    echo.
-    echo Adding text into the file.
-    set /p txtFile= Enter the name of the file that you want to add text: 
-    set /p txtToBeAdded= Type here your text: 
-    echo %txtToBeAdded% >> C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\%txtFile%
-    echo.
-    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto writeFile
-    if "%menu_choice%"=="n" goto submenu_1
-::end of block
-
-::Overwriting file
-:overwriteFile
-    cls
-    echo.
-    echo Replacing the content of the excisting file
-    echo.
-    set /p txtFile= Enter the name of the file that you want to overwrite: 
-    set /p txtToBeAdded= Type here your text: 
-    echo %txtToBeAdded% > C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\%txtFile%
-    echo.
-    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto overwriteFile
-    if "%menu_choice%"=="n" goto submenu_1
-::end of block
-
-::copying file
-:copyFile
-    cls
-    echo.
-    echo Copying 
-    echo.
-    dir
-    echo.
-    echo Enter the name of the file that you want to copy: 
-    set /p source=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
-    echo.
-    echo Enter the name of new file:
-    ::set /p destination=z:\Documents\Scripts\BatchScripts 
-    set /p destination=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
-    xcopy %source% %destination%* 
-    
-    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-    if "%menu_choice%"=="y" goto copyFile
-    if "%menu_choice%"=="n" goto submenu_1
-::end of block
-
-::Moving File
-:moveFile
-    cls
-    echo Move file
-    echo.
-    echo Press 1 in case you want to enter the full source path_address.
-    echo Press 2 in case you want to enter only the destination's path_address
-    echo.
-    set /p choice= Please select one of the options: 
-    if %choice%==1 goto specifingSourceAndDestination 
-    if %choice%==2 goto specifingDestination
-    
-    :specifingSourceAndDestination
-        set /p source= Enter the full path of the file that you want to move:
+    ::Creating new file and specifing extension 
+    :newFile
+        cls
+        set /p name=Enter the name of your file:
+        set /p extension=Enter the extension of your file:
         echo.
-        set /p destination= Enter the destination path:
-        move %source% %destination%
-
+        set /p menu_choice="Would you like to add text to your file (Y)/(N) ? " 
+        if "%menu_choice%"=="y" goto enterText
+        if "%menu_choice%"=="n" goto submenu_1
+        echo.
+        :enterText
+        set /p txt=Enter some text into your file: 
+        echo %txt% >> %name%.%extension%
+        echo.
         set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-        if "%menu_choice%"=="y" goto moveFile
+        if "%menu_choice%"=="y" goto newFile
         if "%menu_choice%"=="n" goto submenu_1
     ::end of block
 
-    :specifingDestination
+    ::Reading/Opening file
+    :openFile
+        dir
+        echo.
+        set /p fileName=Enter the name of the file: 
+        start C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\%fileName%\
+        echo.
+        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+        if "%menu_choice%"=="y" goto openFile
+        if "%menu_choice%"=="n" goto submenu_1
+
+    ::end of block
+
+    ::Adding into file
+    :writeFile
+        cls
+        echo.
+        echo Adding text into the file.
+        set /p txtFile= Enter the name of the file that you want to add text: 
+        set /p txtToBeAdded= Type here your text: 
+        echo %txtToBeAdded% >> C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\%txtFile%
+        echo.
+        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+        if "%menu_choice%"=="y" goto writeFile
+        if "%menu_choice%"=="n" goto submenu_1
+    ::end of block
+
+    ::Overwriting file
+    :overwriteFile
+        cls
+        echo.
+        echo Replacing the content of the excisting file
+        echo.
+        set /p txtFile= Enter the name of the file that you want to overwrite: 
+        set /p txtToBeAdded= Type here your text: 
+        echo %txtToBeAdded% > C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\%txtFile%
+        echo.
+        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+        if "%menu_choice%"=="y" goto overwriteFile
+        if "%menu_choice%"=="n" goto submenu_1
+    ::end of block
+
+    ::copying file
+    :copyFile
+        cls
+        echo.
+        echo Copying 
         echo.
         dir
         echo.
-        echo Please enter name path of the file that you want to move: 
+        echo Enter the name of the file that you want to copy: 
         set /p source=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
         echo.
-        set /p destination= Enter the destination path: 
-        move %source% %destination%
-
+        echo Enter the name of new file:
+        ::set /p destination=z:\Documents\Scripts\BatchScripts 
+        set /p destination=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
+        xcopy %source% %destination%* 
+        
         set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-        if "%menu_choice%"=="y" goto moveFile
+        if "%menu_choice%"=="y" goto copyFile
         if "%menu_choice%"=="n" goto submenu_1
     ::end of block
 
-::end of block
-
-::Deleting File
-:deleteFile
-    cls
-    echo Deleting 
-    echo.
-    echo Press 1 in case you want to enter the full source path_address.
-    echo Press 2 in case you want to delete a file from the current working directory.
-    echo.
-    set /p choice= Please select one of the options: 
-    if %choice%==1 goto specifingSource
-    if %choice%==2 goto delByFileName
-    
-    :specifingSource
-        set /p filePath= Enter the full path of the file that you want to delete:
+    ::Moving File
+    :moveFile
+        cls
+        echo Move file
         echo.
-        del %filePath%
-        echo The file at this specific path has been deleted!
+        echo Press 1 in case you want to enter the full source path_address.
+        echo Press 2 in case you want to enter only the destination's path_address
         echo.
+        set /p choice= Please select one of the options: 
+        if %choice%==1 goto specifingSourceAndDestination 
+        if %choice%==2 goto specifingDestination
+        
+        :specifingSourceAndDestination
+            set /p source= Enter the full path of the file that you want to move:
+            echo.
+            set /p destination= Enter the destination path:
+            move %source% %destination%
 
-        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-        if "%menu_choice%"=="y" goto deleteFile
-        if "%menu_choice%"=="n" goto submenu_1
+            set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+            if "%menu_choice%"=="y" goto moveFile
+            if "%menu_choice%"=="n" goto submenu_1
+        ::end of block
+
+        :specifingDestination
+            echo.
+            dir
+            echo.
+            echo Please enter name path of the file that you want to move: 
+            set /p source=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
+            echo.
+            set /p destination= Enter the destination path: 
+            move %source% %destination%
+
+            set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+            if "%menu_choice%"=="y" goto moveFile
+            if "%menu_choice%"=="n" goto submenu_1
+        ::end of block
+
     ::end of block
 
-    :delByFileName
+    ::Deleting File
+    :deleteFile
+        cls
+        echo Deleting 
         echo.
-        dir
+        echo Press 1 in case you want to enter the full source path_address.
+        echo Press 2 in case you want to delete a file from the current working directory.
         echo.
-        echo Please enter the name of the file that you want to delete: 
-        set /p fileName=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
-        echo.
-        del %fileName%
-        echo %fileName% has been deleted!
-        echo.
+        set /p choice= Please select one of the options: 
+        if %choice%==1 goto specifingSource
+        if %choice%==2 goto delByFileName
+        
+        :specifingSource
+            set /p filePath= Enter the full path of the file that you want to delete:
+            echo.
+            del %filePath%
+            echo The file at this specific path has been deleted!
+            echo.
 
-        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-        if "%menu_choice%"=="y" goto deleteFile
-        if "%menu_choice%"=="n" goto submenu_1
+            set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+            if "%menu_choice%"=="y" goto deleteFile
+            if "%menu_choice%"=="n" goto submenu_1
+        ::end of block
+
+        :delByFileName
+            echo.
+            dir
+            echo.
+            echo Please enter the name of the file that you want to delete: 
+            set /p fileName=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
+            echo.
+            del %fileName%
+            echo %fileName% has been deleted!
+            echo.
+
+            set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+            if "%menu_choice%"=="y" goto deleteFile
+            if "%menu_choice%"=="n" goto submenu_1
+        ::end of block
+
     ::end of block
 
-::end of block
-
-::Renaming Fie 
-:renameFile
-    cls
-    echo Renaming
-    echo.
-    echo Press 1 in case you want to enter the full source path_address.
-    echo Press 2 in case you want to rename a file from the current working directory.
-    echo.
-    set /p choice= Please select one of the options: 
-    if %choice%==1 goto specifingSource
-    if %choice%==2 goto renByFileName
-    
-    :specifingSource
-        set /p filePath= Enter the full path of the file that you want to rename:
+    ::Renaming Fie 
+    :renameFile
+        cls
+        echo Renaming
         echo.
-        ren %filePath%
-        echo The file at this specific path has been renamed!
+        echo Press 1 in case you want to enter the full source path_address.
+        echo Press 2 in case you want to rename a file from the current working directory.
         echo.
+        set /p choice= Please select one of the options: 
+        if %choice%==1 goto specifingSource
+        if %choice%==2 goto renByFileName
+        
+        :specifingSource
+            set /p filePath= Enter the full path of the file that you want to rename:
+            echo.
+            ren %filePath%
+            echo The file at this specific path has been renamed!
+            echo.
 
-        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-        if "%menu_choice%"=="y" goto renameFile
-        if "%menu_choice%"=="n" goto submenu_1
+            set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+            if "%menu_choice%"=="y" goto renameFile
+            if "%menu_choice%"=="n" goto submenu_1
+        ::end of block
+
+        :renByFileName
+            echo.
+            dir
+            echo.
+            echo Please enter the name of the file that you want to rename: 
+            set /p fileName=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
+            echo.
+            ren %fileName%
+            echo %fileName% has been renamed!
+            echo.
+
+            set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+            if "%menu_choice%"=="y" goto renameFile
+            if "%menu_choice%"=="n" goto submenu_1
+        ::end of block
     ::end of block
 
-    :renByFileName
-        echo.
-        dir
-        echo.
-        echo Please enter the name of the file that you want to rename: 
-        set /p fileName=C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\
-        echo.
-        ren %fileName%
-        echo %fileName% has been renamed!
-        echo.
-
-        set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
-        if "%menu_choice%"=="y" goto renameFile
-        if "%menu_choice%"=="n" goto submenu_1
+    ::File Location
+    :fileExplorer
+        start C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts
+        goto submenu_1
     ::end of block
-::end of block
+::end of submenu 1
 
-::File Location
-:fileExplorer
-    start C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts
-    goto submenu_1
-::end of block
 
 ::this is submenu 2 (Applications)
 :submenu_2
@@ -294,7 +291,7 @@ echo.
     if %M%==1 start cmd
     if %M%==2 start powershell
     if %M%==3 start explorer
-    if %M%==4 start Settings
+    if %M%==4 start ms-settings:
     if %M%==0 goto main
     
     echo.
