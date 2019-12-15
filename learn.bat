@@ -1,7 +1,7 @@
 @echo off
-title This Is Batch File
+title %username% This Is Batch File
 
-rem commenting
+rem block commenting
 rem ==========================================================
     rem ctrl + k  ctrl + c   for multiple line comments
     rem ctrl + k  ctrl + u   for multiple line uncommenting 
@@ -166,15 +166,13 @@ rem ==========================================================
 rem File Maker
 rem ==========================================================
      
-    rem the last line of this code doesnt work .......
-    rem set /p name=Enter the name of your file:
-    rem set /p extention=Enter the extension of your file:
-    rem set /p text = write smth: 
-    rem echo %text% >> %name%.%extention% 
-
-    rem the bellow code works fine.
-    rem set /p txt=Enter some text: 
-    rem echo %txt% >> someText.txt
+    ::the last line of this code doesnt work .......
+    cls
+    set /p name=Enter the name of your file:
+    set /p extension=Enter the extension of your file:
+    
+    set /p txt=Enter some text into your file: 
+    echo %txt% >> %name%.%extension%
 
 rem ==========================================================
 

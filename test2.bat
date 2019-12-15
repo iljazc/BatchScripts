@@ -12,99 +12,149 @@ echo.
 
 ::This is Main menu 
 :main 
+    cls
+    echo.
     echo 1. File Management
     echo 2. Applications 
     echo 3. System
     echo 4. Power Functions 
-    echo 5. Exit
+    echo 0. Exit
     echo.
 
-    set /p choice="Enter your choice: " 
-    if "%choice%"=="1" goto submenu_1 
-    if "%choice%"=="2" goto submenu_2 
-    if "%choice%"=="3" goto submenu_3 
-    if "%choice%"=="4" goto submenu_4
-    if "%choice%"=="5" exit /b
+    set /p choice= Enter your choice: 
+    if %choice%==1 goto submenu_1 
+    if %choice%==2 goto submenu_2 
+    if %choice%==3 goto submenu_3 
+    if %choice%==4 goto submenu_4
+    if %choice%==0 goto exitting
 ::end of Main menu
+
 
 
 ::This is submenu 1 (File Management)
 :submenu_1 
+    cls
     echo File Management 
     ECHO.    
     echo 1. New File
     echo 2. Read File
-    echo 3. Overwrite File
+    echo 3. Write into File
     echo 4. Copy File
     echo 5. Move File
     echo 6. Delete File
     echo 7. Rename File
+    echo 8. Open File Location
     echo 0. Go Back
     ECHO.
 
     SET /P M=Type your option, then press ENTER:
-    IF %M%==1 goto createFile
-    IF %M%==2 goto readFile 
-    IF %M%==3 goto overwriteFile
-    IF %M%==4 start 
-    IF %M%==5 start
-    IF %M%==6 start 
-    IF %M%==0 goto main
+    if %M%==1 goto newFile
+    if %M%==2 goto openFile 
+    if %M%==3 goto writeFile
+    if %M%==4 start 
+    if %M%==5 start
+    if %M%==6 start 
+    if %M%==7 start
+    if %M%==8 goto fileExplorer
+    if %M%==0 goto main
+    
+    
+::end of submenu 1 
+
+
+
+::Creating new file and specifing extension 
+:newFile
+    cls
+    set /p name=Enter the name of your file:
+    set /p extension=Enter the extension of your file:
+    echo.
+    set /p menu_choice="Would you like to add text to your file (Y)/(N) ? " 
+    if "%menu_choice%"=="y" goto enterText
+    if "%menu_choice%"=="n" goto submenu_1
+    echo.
+    :enterText
+    set /p txt=Enter some text into your file: 
+    echo %txt% >> %name%.%extension%
+    echo.
+    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+    if "%menu_choice%"=="y" goto submenu_1
+    if "%menu_choice%"=="n" goto main
+::end of block
+
+::Reading/Opening file
+:openFile
+    dir
+    echo.
+    set /p rfile =Enter the name of the file: 
+    
+    
+    %SystemRoot%\system32\cmd.exe "rfile"
+    
+    
+    echo.
+    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+    if "%menu_choice%"=="y" goto submenu_1
+    if "%menu_choice%"=="n" goto main
+
+::end of block
+
+::Overwriting files
+:writeFile
+    cls
+    echo.
+    echo Adding text into the file.
     
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
     if "%menu_choice%"=="y" goto submenu_1
     if "%menu_choice%"=="n" goto main
-::end of submenu 1 
-
-
-::Creating new file and assining extension 
-:newFile
-    set /p name=Enter the name of your file:
-    set /p extention=Enter the extension of your file:
-    echo you created %name%.%extension%
-    goto submenu_1
-::end of block
-
-::Reading/Opening file
-:readFile
-    dir
-    set /p rfile =Enter the name of the file: 
-    start %rfile%
-    goto submenu_1
-::end of block
-
-::Overwriting files
-:overwriteFile
-    echo Overwriting
-    goto submenu_1
 ::end of block
 
 ::copying file
 :copyFile
     echo Copying 
-    goto submenu_1
+    
+    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+    if "%menu_choice%"=="y" goto submenu_1
+    if "%menu_choice%"=="n" goto main
 ::end of block
 
 ::Moving File
 :moveFile
     echo Moving
-    goto submenu_1
+    
+    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+    if "%menu_choice%"=="y" goto submenu_1
+    if "%menu_choice%"=="n" goto main
 ::end of block
 
 ::Deleting File
 :deleteFile
     echo Deleting 
-    goto submenu_1
+    
+    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+    if "%menu_choice%"=="y" goto submenu_1
+    if "%menu_choice%"=="n" goto main
 ::end of block
 
 ::Renaming Fie 
 :renameFile
     echo Renaming
-    goto submenu_1
+    
+    set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+    if "%menu_choice%"=="y" goto submenu_1
+    if "%menu_choice%"=="n" goto main
 ::end of block
+
+::File Location
+:fileExplorer
+    start C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts
+::end of block
+
 
 ::this is submenu 2 (Applications)
 :submenu_2
+    cls
     echo This is Submenu 2
     echo.
     echo Applications 
@@ -116,22 +166,78 @@ echo.
     ECHO 0 - Back to Main Menu
     ECHO.
 
-    SET /P M=Type 1, 2, 0, then press ENTER:
+    SET /P M=Type 1, 2 or 0, then press ENTER:
     if %M%==1 start cmd
     if %M%==2 start powershell
-    if %M%==3 open File Explorer
+    if %M%==3 start explorer
     if %M%==4 open Settings
     if %M%==0 goto main
     
+    echo.
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
     if "%menu_choice%"=="y" goto submenu_2 
     if "%menu_choice%"=="n" goto main
 ::end of submenu 2
 
+
 ::This is submenu 3 (System Informations)
 :submenu_3 
+    cls
+    echo.
     echo System Informations
-    
+    echo 1 OS Info
+    echo 2 Hardware Info
+    echo 3 Network Info
+    echo 0 Main
+    echo.
+    set /p opt= Chose one option: 
+    if %opt%==1 goto osInfos
+    if %opt%==2 goto hardwareInfos
+    if %opt%==3 goto netInfos
+    if %opt%==0 goto main
+
+        
+        :: Section 1: OS information.
+        :osInfos
+            ECHO. 
+            ECHO OS INFO
+            ECHO.
+            systeminfo | findstr /c:"OS Name"
+            systeminfo | findstr /c:"OS Version"
+            systeminfo | findstr /c:"System Type"
+            echo.
+            set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+            if "%menu_choice%"=="y" goto osInfos 
+            if "%menu_choice%"=="n" goto submenu_3
+        ::end of osInfos
+
+        :: Section 2: Hardware information.
+        :hardwareInfos
+            cls
+            ECHO.
+            ECHO HARDWARE INFO
+            ECHO.
+            systeminfo | findstr /c:"Total Physical Memory"
+            wmic cpu get Name
+            echo.
+            set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+            if "%menu_choice%"=="y" goto hardwareInfos 
+            if "%menu_choice%"=="n" goto submenu_3
+        ::end of hardwareInfos
+
+        :: Section 3: Networking information.
+        :netInfos
+            cls
+            ECHO.
+            ECHO NETWORK INFO
+            ECHO. 
+            ipconfig | findstr IPv4
+            ipconfig | findstr IPv6
+            echo.
+            set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
+            if "%menu_choice%"=="y" goto netInfos 
+            if "%menu_choice%"=="n" goto submenu_3
+        ::end of netInfos            
 
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
     if "%menu_choice%"=="y" goto submenu_3 
@@ -139,8 +245,10 @@ echo.
 
 ::end of submenu 3
 
+
 ::This is submenu 4 (Power Options)
 :submenu_4
+    cls
     echo Power Options
     echo 1. Shutdown
     echo 2. Restart
@@ -162,3 +270,8 @@ echo.
 
 
 
+::exit
+:exitting
+    cls
+    exit /b
+::end of exit block
