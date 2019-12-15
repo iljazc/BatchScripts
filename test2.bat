@@ -128,7 +128,10 @@ echo.
 ::copying file
 :copyFile
     echo Copying 
-    
+    echo /p %srcLoc%=Enter your source location: 
+    echo /p %trgLoc%=Enter your target location: 
+    copy /s C:\Users\iljaz\OneDrive\Documents\Scripts\BatchScripts\TestSubmenu.bat C:\Users\iljaz\OneDrive\Desktop\
+
     set /p menu_choice="Would you like to run this submenu again (Y)/(N) ? " 
     if "%menu_choice%"=="y" goto copyFile
     if "%menu_choice%"=="n" goto submenu_1
