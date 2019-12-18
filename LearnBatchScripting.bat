@@ -1,4 +1,4 @@
-::Author: iljazc 
+::Author: iljazc
 ::Profile: http://github.com/iljazc
 ::All rights reserverd.
 ::Consider referring to this profile for any use of this code sample.
